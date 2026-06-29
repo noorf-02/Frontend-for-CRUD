@@ -4,20 +4,42 @@ import React, { useEffect, useState } from 'react'
 const url = "http://localhost:5000/products"
 function ProductsComp() {
     const [ api,setApi ] = useState([]);
+    const [ products, setProducts ] = useState([])
+    const [ category, setCategory ] = useState('all');
    async function fetchApi (){
         const data = await fetch(url);
         const res = await data.json();
         console.log(res);
         setApi(res);
-    }
+        setProducts(res);
+        }
 
     useEffect(()=>{
         fetchApi();
     },[])
 
+    function activeCategory(category){
+        setCategory(category);
+        if(category==="all"){
+            setApi(products);
+        }
+        else{
+            setApi(products.filter((p)=>p.category===category));
+        }
+    }
+
+
+
 
 
   return (
+    <>
+    <div className='wrapper flex justify-baseline gap-7 my-3'>
+        <button className='text-white bg-black px-6 py-1 rounded-full hover:bg-[#202020] cursor-pointer' onClick={()=>activeCategory("all")}>All</button>
+        <button className='text-white bg-black px-6 py-1 rounded-full hover:bg-[#202020] cursor-pointer' onClick={()=>activeCategory("Fruit")}>Fruits</button>
+        <button className='text-white bg-black px-6 py-1 rounded-full hover:bg-[#202020] cursor-pointer' onClick={()=>activeCategory("Veggie")}>Vegetables</button>
+    </div>
+
     <div className='products-container my-8'>
         <div className="wrapper flex flex-wrap justify-center gap-[35px]">
             {
@@ -41,6 +63,7 @@ function ProductsComp() {
             }
         </div>
     </div>
+    </>
   )
 }
 

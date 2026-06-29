@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavComp() {
   const [ btn,setBtn ] = useState();
-
+  const navigate = useNavigate();
 
   return (
     <nav className="bg-gray-100 p-2 shadow-[0_4px_14px_0_rgba(0,0,0,0.25)]">
       <div className="wrapper my-3 flex justify-between">
-        <h1 className="text-2xl font-bold">CRUD</h1>
+        <h1 className="text-2xl font-bold cursor-pointer" onClick={()=>navigate('/')}>CRUD</h1>
         <div className="nav-list list-none flex gap-2">
-          <li className="text-white bg-[#151515] px-3 py-1 rounded-full hover:bg-[#202020] cursor-pointer ">
+          <li className="text-white bg-[#151515] px-3 py-1 rounded-full hover:bg-[#202020] cursor-pointer " onClick={()=>navigate('/products')} >
             Products
           </li>
           <li className="text-white bg-[#151515] px-3 py-1 rounded-full hover:bg-[#202020] cursor-pointer ">

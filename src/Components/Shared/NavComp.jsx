@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 function NavComp() {
-  
+  const [ btn,setBtn ] = useState();
 
 
   return (
@@ -16,8 +16,8 @@ function NavComp() {
             Form
           </li>
         </div>
-        <div className="btn-theme bg-[#151515] h-7 w-14 rounded-full flex items-center p-1">
-          <div className="ball-theme h-5 w-5 rounded-full bg-white"></div>
+        <div className={`btn-theme bg-[#151515] h-7 w-12 rounded-full flex items-center p-1`} onClick={()=>setBtn(!btn)}>
+          <div className={`ball-theme h-5 w-5 rounded-full bg-white ${btn? 'translate-x-5' : 'translate-0'} transition-all duration-200`}></div>
         </div>
       </div>
     </nav>
